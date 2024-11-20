@@ -15,7 +15,7 @@ def exchange():
             data=response.json() #ответ от json
             if code in data["rates"]: #если внутри rates есть код валют, то можно обрабатывать
                 exchange_rate=data["rates"][code]# курс обмена из словаря (date rates) выбираем значение по ключу
-                mb.showinfo("курс обмена", f"курс: {exchange_rate}{code} за 1 доллар")# выводим окно
+                mb.showinfo("курс обмена", f"курс: {exchange_rate:.2f}{code} за 1 доллар")# выводим окно. .2f означает количество символов после запятой, чтобы отражались лишь сотые (f-это формат)
             else:
                 mb.showerror("ошибка", f"валюта {code} не найдена")
         except Exception as e: # обрабатываем исключения
