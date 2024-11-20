@@ -2,12 +2,13 @@ import requests
 import json
 from tkinter import*
 from tkinter import messagebox as mb
+from tkinter import ttk
 
 from bottle import response
 
 
 def exchange():
-    code =entry.get() # код валюты получаем из поля ввода информации
+    code =combobox.get() # код валюты получаем из поля ввода информации
     if code: #делаем проверку, если код введен, то работаем и делаем обработку исключений
         try:
             response=requests.get("https://open.er-api.com/v6/latest/USD")# ответ получим из вопроса с сайта
@@ -28,10 +29,15 @@ window=Tk()
 window.title("курс обмена валют")
 window.geometry("360x180")
 
-Label(text="введите код валюты").pack(padx=10, pady=10)
+Label(text="выберите код валюты").pack(padx=10, pady=10)
 
-entry=Entry()
-entry.pack(padx=10, pady=10)
+cur =["RUB","EUR","GBP","JPY","CNY","KZT","UZS","CHF","AED","CAD"]
+combobox=ttk.Combobox(value=cur) # присваиваем комбобоксу значение cur(список)
+combobox.pack(padx=10, pady=10)
+
+
+#entry=Entry()
+#entry.pack(padx=10, pady=10)
 
 Button(text="получить курс обмена к доллару",command=exchange).pack(padx=10, pady=10)# кнопка с функцией обмена
 
